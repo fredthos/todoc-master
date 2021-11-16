@@ -16,6 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
     lintOptions {
         disable 'RestrictedApi'
     }
@@ -45,4 +50,7 @@ dependencies {
     // Mockito
     testImplementation 'org.mockito:mockito-core:3.11.2'
     androidTestImplementation "org.mockito:mockito-android:3.11.2"
+   //BUTTERKNIFE
+//   implementation 'com.jakewharton:butterknife:8.8.1'
+//   annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

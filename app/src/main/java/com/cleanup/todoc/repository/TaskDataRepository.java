@@ -9,11 +9,11 @@ import com.cleanup.todoc.model.Task;
 import java.util.List;
 
 
-public class TaskRepository {
+public class TaskDataRepository {
 
     private TaskDao mTaskDao;
 
-    public TaskRepository(TaskDao taskDao) {
+    public TaskDataRepository(TaskDao taskDao) {
         mTaskDao = taskDao;
     }
 

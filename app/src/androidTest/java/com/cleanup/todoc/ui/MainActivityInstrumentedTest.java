@@ -1,4 +1,4 @@
-package com.cleanup.todoc;
+package com.cleanup.todoc.ui;
 
 import android.view.View;
 import android.widget.TextView;
@@ -8,7 +8,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.cleanup.todoc.ui.MainActivity;
+import com.cleanup.todoc.R;
 
 import org.junit.Rule;
 import org.junit.Test;

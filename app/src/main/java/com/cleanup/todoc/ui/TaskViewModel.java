@@ -7,9 +7,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
-import com.cleanup.todoc.repository.ProjectRepository;
-import com.cleanup.todoc.repository.TaskRepository;
-
+import com.cleanup.todoc.repository.ProjectDataRepository;
+import com.cleanup.todoc.repository.TaskDataRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -18,19 +17,19 @@ import java.util.concurrent.Executor;
 public class TaskViewModel extends ViewModel {
 
     // REPOSITORIES
-    private final ProjectRepository mProjectRepository;
-    private final TaskRepository mTaskRepository;
-    private final Executor executor;
+    private final ProjectDataRepository mProjectDataRepository;
+    private final TaskDataRepository mTaskDataRepository;
+    private final Executor mExecutor;
 
     // DATA
     @Nullable
     private LiveData<List<Project>> mLiveProjects;
 
-    public TaskViewModel(ProjectRepository projectRepository, TaskRepository taskRepository, Executor executor) {
-        this.mProjectRepository = projectRepository;
-        this.mTaskRepository = taskRepository;
-        this.executor = executor;
-        this.mLiveProjects = projectRepository.getProjects();
+    public TaskViewModel(ProjectDataRepository projectDataRepository, TaskDataRepository taskDataRepository, Executor executor) {
+        this.mProjectDataRepository = projectDataRepository;
+        this.mTaskDataRepository = taskDataRepository;
+        this.mExecutor = executor;
+        this.mLiveProjects = projectDataRepository.getProjects();
 
     }
 
@@ -40,28 +39,29 @@ public class TaskViewModel extends ViewModel {
     // -------------
 
     public LiveData<List<Project>> getLiveProjects() {
-        return this.mLiveProjects;  }
+        return this.mLiveProjects;
+    }
 
     // -------------
     // FOR TASK
     // -------------
 
     public LiveData<List<Task>> getTasks() {
-        return mTaskRepository.getTasks();
+        return mTaskDataRepository.getTasks();
     }
 
     public void createTask(Task task) {
-        executor.execute(() -> {mTaskRepository.createTask(task);
+        mExecutor.execute(() -> {mTaskDataRepository.createTask(task);
         });
     }
 
     public void deleteTask(Task task) {
-        executor.execute(() -> {mTaskRepository.deleteTask(task);
+        mExecutor.execute(() -> {mTaskDataRepository.deleteTask(task);
         });
     }
 
     public void updateTask(Task task) {
-        executor.execute(() -> {mTaskRepository.updateTask(task);
+        mExecutor.execute(() -> {mTaskDataRepository.updateTask(task);
         });
     }
 }

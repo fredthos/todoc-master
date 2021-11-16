@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 /**
  * <p>Models for project in which tasks are included.</p>
  *
@@ -18,7 +20,7 @@ public class Project {
      * The unique identifier of the project
      */
     @PrimaryKey
-    private final long id;
+    private long id;
 
     /**
      * The name of the project
@@ -51,13 +53,13 @@ public class Project {
      * @return all the projects of the application
      */
     @NonNull
-    public static Project[] getAllProjects() {
-        return new Project[]{
-                new Project(1L, "Projet Tartampion", 0xFFEADAD1),
-                new Project(2L, "Projet Lucidia", 0xFFB4CDBA),
-                new Project(3L, "Projet Circus", 0xFFA3CED2),
-        };
-    }
+//    public static Project[] getAllProjects() {
+//        return new Project[]{
+//                new Project(1L, "Projet Tartampion", 0xFFEADAD1),
+//                new Project(2L, "Projet Lucidia", 0xFFB4CDBA),
+//                new Project(3L, "Projet Circus", 0xFFA3CED2),
+//        };
+//    }
 
     /**
      * Returns the project with the given unique identifier, or null if no project with that
@@ -67,8 +69,8 @@ public class Project {
      * @return the project with the given unique identifier, or null if it has not been found
      */
     @Nullable
-    public static Project getProjectById(long id) {
-        for (Project project : getAllProjects()) {
+    public static Project getProjectById(List<Project> projects, long id) {
+        for (Project project : projects) {
             if (project.id == id)
                 return project;
         }

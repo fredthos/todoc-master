@@ -1,14 +1,12 @@
-package com.cleanup.todoc;
+package com.cleanup.todoc.dao;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.InstrumentationRegistry;
 
-import com.cleanup.LiveDataTestUtil;
-import com.cleanup.todoc.database.SaveMyTasksDatabase;
-import com.cleanup.todoc.database.dao.ProjectDao;
+import com.cleanup.todoc.LiveDataTestUtil;
+import com.cleanup.todoc.database.TodocDatabase;
 import com.cleanup.todoc.database.dao.TaskDao;
-import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
 import org.junit.After;
@@ -23,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 public class TaskDaoTest {
 
     // FOR DATA
-    private SaveMyTasksDatabase database;
+    private TodocDatabase database;
     private TaskDao mTaskDao;
 
     @Rule
@@ -32,9 +30,10 @@ public class TaskDaoTest {
     @Before
     public void initDb() throws Exception {
         this.database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
-                SaveMyTasksDatabase.class)
+                TodocDatabase.class)
                 .allowMainThreadQueries()
                 .build();
+        mTaskDao = database.mTaskDao();
     }
 
     @After

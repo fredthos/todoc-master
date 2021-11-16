@@ -16,22 +16,23 @@ import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
 @Database(entities = {Project.class, Task.class}, version = 1, exportSchema = false)
-public abstract class SaveMyTasksDatabase extends RoomDatabase {
+public abstract class TodocDatabase extends RoomDatabase {
 
     // --- SINGLETON ---
-    private static volatile SaveMyTasksDatabase INSTANCE;
+    private static volatile TodocDatabase INSTANCE;
 
     // --- DAO ---
     public abstract ProjectDao mProjectDao();
     public abstract TaskDao mTaskDao();
 
     // --- INSTANCE ---
-    public static SaveMyTasksDatabase getInstance(Context context) {
+    public static TodocDatabase getInstance(Context context) {
         if (INSTANCE == null) {
-            synchronized (SaveMyTasksDatabase.class) {
+            synchronized (TodocDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            SaveMyTasksDatabase.class, "SaveMyTasksDatabase.db")
+                            TodocDatabase.class, "TodocDatabase.db")
+                            .fallbackToDestructiveMigration()
                             .addCallback(populateDatabase())
                             .build();
                 }
@@ -41,7 +42,6 @@ public abstract class SaveMyTasksDatabase extends RoomDatabase {
     }
     private static Callback populateDatabase(){
         return new Callback() {
-
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate(db);
