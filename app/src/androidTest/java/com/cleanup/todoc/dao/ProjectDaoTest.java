@@ -18,6 +18,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ProjectDaoTest {
@@ -52,7 +53,7 @@ public class ProjectDaoTest {
     }
 
     @Test
-    public void insertAndGetProjets() throws InterruptedException {
+    public void insertAndGetProjects() throws InterruptedException {
         // Given
        Project project1 = new Project(1L, "Projet Tartampion", 0xFFEADAD1);
        Project project2 = new Project(2L,"Projet Lucidia", 0xFFB4CDBA);
@@ -72,8 +73,8 @@ public class ProjectDaoTest {
 
         // Then
         assertTrue(projects.size() == expectedProjects.size());
-
-
+        assertEquals(projects.get(0).getName(), expectedProjects.get(0).getName());
+        assertEquals(projects.get(1).getName(), expectedProjects.get(1).getName());
+        assertEquals(projects.get(2).getName(), expectedProjects.get(2).getName());
     }
-
 }
